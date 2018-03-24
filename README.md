@@ -1,18 +1,29 @@
+## SLOSBD - Sample Block device driver
+##### Author:		Ritesh Harjani <ritesh.harjani@gmail.com>
+
+[![About me](https://img.shields.io/badge/author-rharjani-brightgreen.svg)](https://github.com/riteshharjani)
+=====================================================================
+
+### Description
 This is sample block device driver example compiled and tested
 on 3.10 kernel.
 
 This is based out of LWN article: https://lwn.net/Articles/58719/
 which was based on 2.6 kernel.
 
-Makefile:
+### Makefile:
+```
 obj-y	+= slos_bd.o
+```
 
-Commands on Terminal:
-1. ls /dev/block/slos0
+### Commands on Terminal:
+```
+ls /dev/block/slos0
+./data/busybox/busybox fdisk /dev/block/slos0
+```
 
-2. ./data/busybox/busybox fdisk /dev/block/slos0
-
-3. Create partition
+#### Create partition
+```
 Command (m for help): n
 Command action
    e   extended
@@ -28,15 +39,14 @@ Command (m for help): w
 The partition table has been altered!
 
 Calling ioctl() to re-read partition table.
+```
+```
+./data/busybox/busybox mkfs.vfat /dev/block/slos0p1
+mount -t vfat /dev/block/slos0p1 /mnt
+echo "slos sample block device" > /mnt/file
+cat /mnt/file.
+umount /mnt
+```
 
-4. ./data/busybox/busybox mkfs.vfat /dev/block/slos0p1
-
-5. mount -t vfat /dev/block/slos0p1 /mnt
-
-6. echo "slos sample block device" > /mnt/file
-
-7. cat /mnt/file.
-
-8. umount /mnt
-
--Ritesh <ritesh.list@gmail.com>
+### Contribution
+Feel free to submit a pull request for any bug fixes/enhancements
